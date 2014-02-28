@@ -24,10 +24,15 @@ end
 
 group :development, :test do 
   gem 'rspec-rails'
+  gem 'brakeman' # for security scanning
+end
+
+group :test do 
+  gem 'shoulda-matchers'
   gem 'fabrication'
+  gem 'ffaker'
   gem 'database_cleaner'
   gem 'simplecov', require: false
-  gem 'brakeman' # for security scanning
 end
 
 group :heroku, :production do

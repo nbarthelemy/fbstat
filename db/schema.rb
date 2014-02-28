@@ -11,9 +11,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20140228181704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "batting_stats", force: true do |t|
+    t.integer "player_id"
+    t.integer "team_id"
+    t.integer "year"
+    t.integer "games_played"
+    t.integer "at_bats"
+    t.integer "runs"
+    t.integer "hits"
+    t.integer "doubles"
+    t.integer "triples"
+    t.integer "homeruns"
+    t.integer "rbis"
+    t.integer "stolen_bases"
+    t.integer "caught_stealing"
+  end
+
+  create_table "players", force: true do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "birth_year"
+    t.string "code"
+  end
+
+  create_table "teams", force: true do |t|
+    t.string "name"
+    t.string "league"
+    t.string "code"
+  end
 
 end

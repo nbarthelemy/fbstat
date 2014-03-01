@@ -19,7 +19,7 @@ class Player < ActiveRecord::Base
 
     def generate_code(first_name, last_name)
       return nil if ( first_name.blank? || last_name.blank? )
-      code = last_name[0..4].gsub(/\W+/,'').downcase + first_name.gsub(/\W+/,'')[0..1]
+      code = ( last_name.gsub(/\W+/,'')[0..4] + first_name.gsub(/\W+/,'')[0..1] ).downcase
       code = code + sprintf("%02d", where("code LIKE ?", "#{code}%").count + 1)
       code
     end

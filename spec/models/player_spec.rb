@@ -18,6 +18,18 @@ describe Player do
     @player = Fabricate(:player, code: 'NMB')
   end
 
+  context :generate_ do
+    it "should return a genrated code for player" do
+      Player.generate_code('Nick', 'Barthelemy').should == 'barthni01'
+    end
+    it "should return nil" do
+      Player.generate_code('Nick', '').should == nil
+    end
+    it "should return nil" do
+      Player.generate_code('','Barthelemy').should == nil
+    end
+  end
+
   context :name do
     it "should return the full name of the player" do
       @player.full_name.should_not be_nil

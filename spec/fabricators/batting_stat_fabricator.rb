@@ -2,7 +2,7 @@ Fabricator(:batting_stat) do
   player          { Player.last || Fabricate(:player) }
   team            { Team.last || Fabricate(:team) }
   year            '2007'
-  games           1
+  games_played    1
   at_bats         1
   runs            1
   hits            1

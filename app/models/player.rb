@@ -6,8 +6,25 @@ class Player < ActiveRecord::Base
 
   ## Validations
 
-  validates :first_name, :last_name, :birth_year, :code, presence: true
+  validates :first_name, :last_name, :code, presence: true
   validates :code, uniqueness: true
+
+  ## Callbacks
+
+  before_validation :ensure_code
+
+  ## Class Methods
+
+  class << self
+
+    def generate_code(first_name, last_name)
+      return nil if ( first_name.blank? || last_name.blank? )
+      code = last_name[0..4].gsub(/\W+/,'').downcase + first_name.gsub(/\W+/,'')[0..1]
+      code = code + sprintf("%02d", where("code LIKE ?", "#{code}%").count + 1)
+      code
+    end
+
+  end
 
   ## Instance Methods
 
@@ -15,5 +32,11 @@ class Player < ActiveRecord::Base
     [ first_name, last_name ].join(' ')
   end
   alias :name :full_name
+
+private
+
+  def ensure_code
+    self.code ||= self.class.generate_code(first_name, last_name)
+  end
 
 end

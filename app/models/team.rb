@@ -9,5 +9,4 @@ class Team < ActiveRecord::Base
   validates :name, :league, :code, presence: true
   validates :code, uniqueness: true
 
-
 end

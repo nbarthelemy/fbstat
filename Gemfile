@@ -11,7 +11,6 @@ gem 'jquery-rails'
 gem 'jquery-rails-cdn'
 gem 'twitter-bootstrap-rails-cdn'
 gem 'sass-rails', '~> 4.0.0'
-#gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
@@ -35,7 +34,7 @@ group :test do
   gem 'simplecov', require: false
 end
 
-group :heroku, :production do
+group :production do
   gem 'unicorn'
   gem 'rails_12factor' # only for heroku
 end

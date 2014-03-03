@@ -6,7 +6,7 @@ class Team < ActiveRecord::Base
 
   ## Validation
 
-  validates :name, :league, :code, presence: true
+  validates :league, :code, presence: true
   validates :code, uniqueness: true
 
 end

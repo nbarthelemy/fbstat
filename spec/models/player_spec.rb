@@ -15,10 +15,10 @@ describe Player do
   end
 
   before(:each) do
-    @player = Fabricate(:player, code: 'NMB')
+    @player = Fabricate(:player, code: 'P1')
   end
 
-  context :generate_ do
+  context :generate_code do
     it "should return a genrated code for player" do
       Player.generate_code('Nick', 'Barthelemy').should == 'barthni01'
     end
@@ -33,6 +33,13 @@ describe Player do
   context :name do
     it "should return the full name of the player" do
       @player.full_name.should_not be_nil
+    end
+  end
+
+  context :teams do
+    it "should have a team for 2012" do
+      Fabricate(:batting_stat, year: 2012)
+      @player.team(2012).name.should == 'Minnesota Twins'
     end
   end
 

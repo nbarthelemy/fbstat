@@ -33,6 +33,10 @@ class Player < ActiveRecord::Base
   end
   alias :name :full_name
 
+  def team(year = Time.now.year)
+    batting_stats.where(year: year).first.try(:team)
+  end
+
 private
 
   def ensure_code

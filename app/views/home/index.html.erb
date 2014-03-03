@@ -1,0 +1,72 @@
+<div class="page-header">
+  <h1>Fantasy Baseball Stats Demo</h1>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h4>2009 - 2010 Most Improved Batting Average</h4>
+    <ul>
+      <li>
+        <% r = BattingStat.most_improved_batting_average(2009, 2010).first %>
+        <%= Player.find(r[:player_id]).name %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h4>2007 Oakland A's</h4>
+    <table id="team" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Player Name</th>
+        <th>Slugging Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% BattingStat.for_team('OAK', 2007).each do |stat| %>
+      <tr>
+        <td><%= stat.player.name %></td>
+        <td><%= stat.slugging_percentage.to_s %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h4> 2011 - 2012 Top 5 Most Improved Fantasy Players</h4>
+    <ol>
+      <% BattingStat.most_improved_fantasy_points(2011, 2012).take(5).each do |r| %>
+        <li><%= Player.find(r[:player_id]).name %></li>
+      <% end %>
+    </ol>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-12">
+    <h4>Triple Crown Winners</h4>
+    <table id="team" class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>American League</th>
+        <th>National League</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% (2011..2012).to_a.reverse.each do |year| %>
+      <tr>
+        <td><%= year %></td>
+        <td><%= BattingStat.triple_crown_winner('American', year).try(:name) || 'No Winner' %></td>
+        <td><%= BattingStat.triple_crown_winner('National', year).try(:name) || 'No Winner' %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
+  </div>
+</div>

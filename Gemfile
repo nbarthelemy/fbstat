@@ -21,12 +21,13 @@ group :development do
   gem 'binding_of_caller' # for better_errors
 end
 
-group :development, :test do 
+group :development, :test do
   gem 'rspec-rails'
   gem 'brakeman' # for security scanning
+  gem 'rails_best_practices'
 end
 
-group :test do 
+group :test do
   gem 'shoulda-matchers'
   gem 'fabrication'
   gem 'ffaker'

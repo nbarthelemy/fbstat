@@ -37,11 +37,11 @@ describe BattingStat do
     end
 
     it "should have the most improved batting average between 2009 and 2010" do
-      BattingStat.most_improved_batting_average(2009, 2010).first[:player_id].should == @p3.id
+      BattingStat.most_improved_batting_average(2009, 2010).first[:player].should == @p3
     end
 
     it "should have the most improved fantasy points between 2011 and 2012" do
-      BattingStat.most_improved_fantasy_points(2011, 2012).first[:player_id].should == @p2.id
+      BattingStat.most_improved_fantasy_points(2011, 2012).first[:player].should == @p2
     end
   end
 

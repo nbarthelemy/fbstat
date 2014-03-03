@@ -22,7 +22,7 @@ module Fbstat
 
     config.assets.precompile += [ 'jquery.js' ]
 
-    config.generators do |g|      
+    config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :fabrication
 

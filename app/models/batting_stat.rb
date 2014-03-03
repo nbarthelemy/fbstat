@@ -22,8 +22,8 @@ class BattingStat < ActiveRecord::Base
       order('players.last_name, players.first_name').references(:teams)
   }
 
-  scope :min_at_bats, lambda{|min_at_bats, start_year, end_year = nil|
-    where('at_bats >= ? AND year IN (?)', min_at_bats, [ start_year, end_year ].compact).
+  scope :min_at_bats, lambda{|min_at_bats, start_year, end_year|
+    where('at_bats >= ? AND year IN (?)', min_at_bats, [ start_year, end_year ]).
       order('player_id, year desc')
   }
 
@@ -61,9 +61,10 @@ class BattingStat < ActiveRecord::Base
   private
 
     def most_improved(stat, start_year, end_year, min_at_bats)
-      records = min_at_bats(min_at_bats, start_year, end_year).group_by(&:player_id).select{|r, s| s.count > 1 }
+      records = min_at_bats(min_at_bats, start_year, end_year).includes(:player).
+        group_by(&:player_id).select{|r, s| s.count > 1 }
       records.collect{|pid, stats|
-        { player_id: pid, value: ( stats.first.send(stat) * 1.0 / stats.last.send(stat) ).to_f }
+        { player: stats.first.player, value: ( stats.first.send(stat) * 1.0 / stats.last.send(stat) ).to_f }
       }.sort_by{|r| r[:value] }.reverse
     end
 
@@ -82,10 +83,10 @@ class BattingStat < ActiveRecord::Base
 
   def slugging_percentage
     n = at_bats.to_f
-    n > 0 ? ([ 
-      ( hits.to_i - doubles.to_i - triples.to_i - homeruns.to_i ), 
-      ( 2 * doubles.to_i ), 
-      ( 3 * triples.to_i ), 
+    n > 0 ? ([
+      ( hits.to_i - doubles.to_i - triples.to_i - homeruns.to_i ),
+      ( 2 * doubles.to_i ),
+      ( 3 * triples.to_i ),
       ( 4 * homeruns.to_i )
     ].sum / n ).round(3) : 0
   end

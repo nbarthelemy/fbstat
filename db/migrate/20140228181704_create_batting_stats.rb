@@ -1,8 +1,8 @@
 class CreateBattingStats < ActiveRecord::Migration
   def change
     create_table :batting_stats do |t|
-      t.references :player
-      t.references :team
+      t.references :player, index: true
+      t.references :team, index: true
       t.integer :year
       t.integer :games_played
       t.integer :at_bats

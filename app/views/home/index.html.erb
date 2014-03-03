@@ -7,8 +7,7 @@
     <h4>2009 - 2010 Most Improved Batting Average</h4>
     <ul>
       <li>
-        <% r = BattingStat.most_improved_batting_average(2009, 2010).first %>
-        <%= Player.find(r[:player_id]).name %>
+        <%= @most_improved_batting_average.name %>
       </li>
     </ul>
   </div>
@@ -25,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-    <% BattingStat.for_team('OAK', 2007).each do |stat| %>
+    <% @batting_stats_for_oak_2007.each do |stat| %>
       <tr>
         <td><%= stat.player.name %></td>
         <td><%= stat.slugging_percentage.to_s %></td>
@@ -40,8 +39,8 @@
   <div class="col-lg-12">
     <h4> 2011 - 2012 Top 5 Most Improved Fantasy Players</h4>
     <ol>
-      <% BattingStat.most_improved_fantasy_points(2011, 2012).take(5).each do |r| %>
-        <li><%= Player.find(r[:player_id]).name %></li>
+      <% @most_improved_fantasy_points.each do |obj| %>
+        <li><%= obj[:player].name %></li>
       <% end %>
     </ol>
   </div>
@@ -59,11 +58,11 @@
       </tr>
     </thead>
     <tbody>
-    <% (2011..2012).to_a.reverse.each do |year| %>
+    <% @triple_crown_winners.each do |obj| %>
       <tr>
-        <td><%= year %></td>
-        <td><%= BattingStat.triple_crown_winner('American', year).try(:name) || 'No Winner' %></td>
-        <td><%= BattingStat.triple_crown_winner('National', year).try(:name) || 'No Winner' %></td>
+        <td><%= obj[:year] %></td>
+        <td><%= obj[:american] %></td>
+        <td><%= obj[:national] %></td>
       </tr>
     <% end %>
     </tbody>

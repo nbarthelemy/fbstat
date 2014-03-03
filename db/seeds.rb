@@ -1,7 +1,7 @@
 require 'csv'
 
 def or_zero(value)
-  value.blank? ? 0 : value 
+  value.blank? ? 0 : value
 end
 
 NATIONAL_LEAGUE_CODES = %w(ATL CHN CIN COL LAN MIA MIL NYN PHI PIT ARI SDN SLN SFN WAS)
@@ -36,7 +36,7 @@ CSV.foreach("#{Rails.root}/db/data/Batting-07-12.csv", headers: true, header_con
   begin
     BattingStat.create!(
       player:           player,
-      team:             team, 
+      team:             team,
       year:             row[:yearid],
       games_played:     or_zero(row[:g]),
       at_bats:          or_zero(row[:ab]),
@@ -45,7 +45,7 @@ CSV.foreach("#{Rails.root}/db/data/Batting-07-12.csv", headers: true, header_con
       doubles:          or_zero(row[:'2b']),
       triples:          or_zero(row[:'3b']),
       homeruns:         or_zero(row[:hr]),
-      rbis:             or_zero(row[:rbi]), 
+      rbis:             or_zero(row[:rbi]),
       stolen_bases:     or_zero(row[:sb]),
       caught_stealing:  or_zero(row[:cs])
     )

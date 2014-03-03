@@ -32,6 +32,9 @@ ActiveRecord::Schema.define(version: 20140228181704) do
     t.integer "caught_stealing"
   end
 
+  add_index "batting_stats", ["player_id"], name: "index_batting_stats_on_player_id", using: :btree
+  add_index "batting_stats", ["team_id"], name: "index_batting_stats_on_team_id", using: :btree
+
   create_table "players", force: true do |t|
     t.string "first_name"
     t.string "last_name"

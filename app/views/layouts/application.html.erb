@@ -28,7 +28,7 @@
     <!-- The fav and touch icons -->
     <link rel="shortcut icon" href="<%= image_path 'favicon.png' %>">
   </head>
-  <body class="<%= body_classes %>">
+  <body>
 
     <header class="navbar navbar-default navbar-fixed-top">
       <div class="navbar-brand">
@@ -37,7 +37,9 @@
     </header>
 
     <div id="body" class="body">
-      <%= yield %>
+      <div class="container">
+        <%= yield %>
+      </div>
     </div>
 
     <footer>
@@ -48,7 +50,6 @@
     <%= jquery_include_tag :google, force: true %>
     <%= twitter_bootstrap_javascript_include_tag :netdna, version: ENV['TWITTER_BOOTSTRAP_VERSION'], force: true %>
     <%= javascript_include_tag "application" %>
-    <%= javascript_init_on_ready %>
 
   </body>
 </html>

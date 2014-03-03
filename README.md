@@ -1,8 +1,9 @@
 
+# Fantasy Baseball Stats
+
 The following is an example application designed to aggregate fantasy baseball stats.
 
-Design Paradigm
-========================
+## Design Paradigm
 
 Based on the given description, this did not seem like a CRUD based application to me. Users of the application would be looking to consume the data not update it. Therefore, I provided no ability to edit the data. My thought was that the data would be updated via some sort of process pulling from an external source ( FTP, RSS, Filesysem, etc.. ) which would untimately invalidate any caches.
 
@@ -14,26 +15,24 @@ Once the application is up and running in development, code coverage metrics are
 
 All tests pass and all development was test-driven.
 
-I noticed a specification to print things to STDOUT. I assumed the desire was to determine my ability to use Rails along with Ruby, so I created a web application based on Rails, but I also created a rake task to print these
+I noticed a specification to print things to STDOUT. I assumed the desire was to determine my ability to use Rails along with Ruby, so I created a web application based on Rails.
 
 
-Getting Started
-========================
+## Getting Started
 
 Once you clone this application from github, run the following steps
 
-1. rake db:create
-2. rake db:migrate
-3. rake db:seed
+* rake db:create
+* rake db:migrate
+* rake db:seed
 
-Next Steps
-========================
+## Next Steps
 
 If I were to continue working on this application, here are the next steps I would take:
 
-1. Sanitize the data
-	- Gather outside reference data for lookups, such as Team Name based on code
-	- Normalize league data
-	- Although I am generating player codes based on the current format, I didn't feel confident resolving conflicts ( Two users with the same code ), because there was a potential to have stats associated with one or the other. So I just skipped the second one to allow the correction of the data.
-2. Build out a data importer which utilizes an adapter pattern to speak to the data source to resolve and sanitize data
-3. Perform frontend page caching which is invalidated by the importation of new data
+* Sanitize the data
+	* Gather outside reference data for lookups, such as Team Name based on code
+	* Normalize league data
+	* Although I am generating player codes based on the current format, I didn't feel confident resolving conflicts ( Two users with the same code ), because there was a potential to have stats associated with one or the other. So I just skipped the second one to allow the correction of the data.
+* Build out a data importer which utilizes an adapter pattern to speak to the data source to resolve and sanitize data
+* Perform frontend page caching which is invalidated by the importation of new data

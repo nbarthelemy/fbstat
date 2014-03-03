@@ -32,7 +32,7 @@ describe Player do
 
   context :name do
     it "should return the full name of the player" do
-      @player.full_name.should_not be_nil
+      @player.name.should_not be_nil
     end
   end
 

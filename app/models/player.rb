@@ -28,10 +28,9 @@ class Player < ActiveRecord::Base
 
   ## Instance Methods
 
-  def full_name
+  def name
     [ first_name, last_name ].join(' ')
   end
-  alias :name :full_name
 
   def team(year = Time.now.year)
     batting_stats.where(year: year).first.try(:team)
